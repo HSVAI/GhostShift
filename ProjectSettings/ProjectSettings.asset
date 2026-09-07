@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!129 &1
+PlayerSettings:
+  companyName: ghtnql
+  productName: Ghost Shift
+  defaultScreenWidth: 1080
+  defaultScreenHeight: 1920
+  defaultScreenWidthWeb: 1080
+  defaultScreenHeightWeb: 1920
+  fullscreenMode: 1
+  defaultScreenOrientation: 3
+  targetDevice: 2
+  usePlayerLog: 1
+  bundleVersion: 0.1.0
+  AndroidBundleVersionCode: 1
+  AndroidMinSdkVersion: 23
+  AndroidTargetSdkVersion: 0
+  AndroidPreferredInstallLocation: 1
+  AndroidEnableArmv9SecurityFeatures: 0
+  AndroidTargetArchitectures: 3
+  scriptingBackend:
+    Android: 0
+  use32BitDisplayBuffer: 1
+  useFlipModelSwapchain: 1
+  runInBackground: 0
+  useOSAutorotation: 0
+  allowedAutorotateToPortrait: 1
+  allowedAutorotateToPortraitUpsideDown: 0
+  allowedAutorotateToLandscapeRight: 0
+  allowedAutorotateToLandscapeLeft: 0
