@@ -60,8 +60,13 @@ namespace GhostShift
             Check(Get<RunScore>("tally").Value == 0, "Restart resets score");
             yield return new WaitForSeconds(.1f);
             Check(errors == 0, "No player errors");
+            Call("HandleBack");
+            Check(Get<float>("backExitDeadline") > Time.unscaledTime, "First back arms exit confirmation");
+            Check(Get<Text>("exitHint").gameObject.activeSelf, "Exit confirmation is visible");
             Debug.Log("GHOSTSHIFT_PLAYER_SMOKE_PASS");
-            Application.Quit(0);
+            Call("HandleBack");
+            yield return new WaitForSeconds(1f);
+            Check(false, "Back exits the app");
         }
         private IEnumerator Screenshot(string name)
         {

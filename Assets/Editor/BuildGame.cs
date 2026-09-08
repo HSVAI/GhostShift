@@ -23,7 +23,7 @@ namespace GhostShift.Editor
             PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
             PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel23;
             PlayerSettings.Android.targetSdkVersion = (AndroidSdkVersions)35;
-            PlayerSettings.Android.bundleVersionCode = 1;
+            PlayerSettings.Android.bundleVersionCode = 2;
             // First playable is a local-test APK, not a store release.
             PlayerSettings.Android.useCustomKeystore = false;
             PlayerSettings.SetUseDefaultGraphicsAPIs(BuildTarget.Android, false);
@@ -60,7 +60,7 @@ namespace GhostShift.Editor
         {
             PlayerSettings.companyName = "ghtnql";
             PlayerSettings.productName = "Ghost Shift";
-            PlayerSettings.bundleVersion = "0.1.0";
+            PlayerSettings.bundleVersion = "0.1.1";
             PlayerSettings.runInBackground = false;
             PlayerSettings.colorSpace = ColorSpace.Gamma;
             PlayerSettings.defaultInterfaceOrientation = UIOrientation.Portrait;

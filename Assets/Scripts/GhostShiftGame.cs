@@ -16,14 +16,14 @@ namespace GhostShift
         private readonly List<Echo> echoes = new List<Echo>();
         private readonly List<Spark> sparks = new List<Spark>();
         private RectTransform root, world, player, panel, soundButton;
-        private Text scoreLabel, bestLabel, waveLabel, comboLabel, title, description, action, soundLabel;
+        private Text scoreLabel, bestLabel, waveLabel, comboLabel, title, description, action, soundLabel, exitHint;
         private Image glow;
         private Font font;
         private AudioSource audioSource;
         private AudioClip shiftSound, breakSound, deathSound;
         private RunScore tally = new RunScore();
         private int lane = -1, best, blocks, chain;
-        private float elapsed, spawnTimer, shiftLock, menuLock, feedbackLife;
+        private float elapsed, spawnTimer, shiftLock, menuLock, feedbackLife, backExitDeadline;
         private bool playing, paused, muted;
 
         private void Awake()
@@ -47,6 +47,11 @@ namespace GhostShift
         {
             float dt = Mathf.Min(Time.deltaTime, .1f);
             menuLock -= Time.unscaledDeltaTime;
+            if (backExitDeadline > 0 && Time.unscaledTime > backExitDeadline)
+            {
+                backExitDeadline = 0;
+                if (exitHint != null) exitHint.gameObject.SetActive(false);
+            }
             AnimateSparks(dt);
             bool pressed = Pressed();
             if (pressed && RectTransformUtility.RectangleContainsScreenPoint(soundButton, Pointer()))
@@ -57,7 +62,7 @@ namespace GhostShift
                 soundLabel.text = muted ? "SFX OFF" : "SFX ON";
                 pressed = false;
             }
-            if (Input.GetKeyDown(KeyCode.Escape) && playing) { SetPaused(!paused); return; }
+            if (Input.GetKeyDown(KeyCode.Escape)) { HandleBack(); return; }
             if (paused) { if (pressed && menuLock <= 0) SetPaused(false); return; }
             if (!playing)
             {
@@ -185,6 +190,19 @@ namespace GhostShift
             Screen.sleepTimeout = value ? SleepTimeout.SystemSetting : SleepTimeout.NeverSleep;
             Debug.Log(value ? "GHOSTSHIFT_PAUSED" : "GHOSTSHIFT_RESUMED");
         }
+        private void HandleBack()
+        {
+            if (backExitDeadline <= 0 || Time.unscaledTime > backExitDeadline)
+            {
+                backExitDeadline = Time.unscaledTime + 2f;
+                if (exitHint != null) exitHint.gameObject.SetActive(true);
+                Debug.Log("GHOSTSHIFT_BACK_ARMED");
+                return;
+            }
+            Screen.sleepTimeout = SleepTimeout.SystemSetting;
+            Debug.Log("GHOSTSHIFT_BACK_EXIT");
+            Application.Quit();
+        }
         private void OnApplicationPause(bool value) { if (value) SetPaused(true); }
         private void OnApplicationFocus(bool value) { if (!value) SetPaused(true); }
         private void RefreshScore()
@@ -231,6 +249,8 @@ namespace GhostShift
             waveLabel = Label("", 25, mint, new Vector2(350, 50), new Vector2(245, 605), root);
             comboLabel = Label("", 30, mint, new Vector2(900, 55), new Vector2(0, -280), root);
             Label("TAP ANYWHERE TO SHIFT", 24, dim, new Vector2(850, 60), new Vector2(0, -805), root);
+            exitHint = Label("PRESS BACK AGAIN TO EXIT", 24, coral, new Vector2(850, 60), new Vector2(0, -700), root);
+            exitHint.gameObject.SetActive(false);
             panel = Box("Menu", new Vector2(940, 1070), new Vector2(0, 30), new Color(ink.r, ink.g, ink.b, .96f), root).rectTransform;
             Box("Accent", new Vector2(66, 6), new Vector2(0, 450), mint, panel);
             Label("O N E - T A P  S U R V I V A L", 23, mint, new Vector2(850, 60), new Vector2(0, 380), panel);
