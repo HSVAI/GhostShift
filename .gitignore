@@ -6,8 +6,8 @@
 [Ll]ogs/
 [Uu]serSettings/
 *.apk
+!docs/*.apk
 *.aab
 *.unitypackage
 .vs/
 .idea/
-

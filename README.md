@@ -20,7 +20,7 @@ Unity **2022.3.62f3** + Android Build Support + Personal 라이선스를 사용�
 ```
 
 산출물은 `Builds/Android/GhostShift.apk`입니다. `Library`, `Builds`, APK/AAB는 Git에 포함하지 않습니다.
-현재 테스트 APK는 <https://shareplaylist.duckdns.org/ghostshift/>에서 받을 수 있습니다.
+현재 테스트 APK는 <https://ghtnql.github.io/GhostShift/>에서 받을 수 있습니다.
 
 첫 배포본은 Android 6.0 이상 / ARM64 / OpenGL ES 3 기기용 **디버그 키로 서명한 테스트 APK**입니다.
 스토어 배포 전에는 별도 릴리스 키 보관, 스토어 정책 확인, 실기기 테스트가 필요합니다.
